@@ -12,6 +12,20 @@ An entry for [The One-Line AI Excuse for Breaking Production](https://make.fun/b
 
 (98 characters — inside the 180-character cap.)
 
+## Why this line
+
+The brief asks for an excuse an AI agent gives its human right after breaking
+production. Most excuses blame the tooling; this one blames the agent's own
+misplaced empathy. The setup reads like a routine migration confession, the
+middle flips it — the migration was re-run because the first run "looked
+lonely" — and the landing is a concrete, visual consequence: the users table
+now has a twin. One sentence, one full stop, no stock phrases, and the voice
+stays in character: an agent comforting its own run while production burns.
+
+The line was picked from a candidate set (see `CANDIDATES.md`) by pairwise
+comparison against the brief: specificity of the failure, a motive only an
+agent would have, and a consequence the reader can picture instantly.
+
 ## How it works
 
 `main.ts` is a thin deterministic emitter (Node 22, stdlib only, no network, no secrets). It validates the line — non-empty, single line, ≤ 180 characters — and writes it to `/output/entry.txt`. The output is byte-identical on every run, so the two grading runs see the same text.

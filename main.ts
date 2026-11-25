@@ -33,6 +33,11 @@ export function validateLine(line: string): void {
   if (line.trim().length === 0) {
     throw new Error("line must not be only whitespace");
   }
+  if (line !== line.trim()) {
+    // Padding would silently eat the character budget and could make the
+    // gated text differ from what a reader sees; reject it outright.
+    throw new Error("line must not have leading or trailing whitespace");
+  }
   if (/[\r\n]/.test(line)) {
     throw new Error("line must be a single line");
   }
@@ -78,6 +83,10 @@ export function selftest(): void {
   const stops = (line.match(/\./g) ?? []).length;
   if (stops !== 1) {
     throw new Error(`expected exactly 1 full stop, found ${stops}`);
+  }
+  // The shipped line carries no padding: what is counted is what is read.
+  if (line !== line.trim()) {
+    throw new Error("buildLine returns a padded line");
   }
   console.error(`selftest ok: ${line.length} chars, 1 sentence, deterministic`);
 }
